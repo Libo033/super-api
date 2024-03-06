@@ -1,16 +1,17 @@
 "use client";
-import { FileCopy, Print, Save, Share } from "@mui/icons-material";
+import { DashboardCustomize, FiberNew, Web } from "@mui/icons-material";
 import { SpeedDial, SpeedDialAction, SpeedDialIcon } from "@mui/material";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const actions = [
-  { icon: <FileCopy />, name: "Copy" },
-  { icon: <Save />, name: "Save" },
-  { icon: <Print />, name: "Print" },
-  { icon: <Share />, name: "Share" },
+  { icon: <FiberNew />, name: "Nueva peticion", redirect: "/new" },
+  { icon: <DashboardCustomize />, name: "Seguir creando", redirect: "/" },
 ];
 
 const Dial = () => {
+  const r = useRouter();
+
   return (
     <div>
       <SpeedDial
@@ -20,6 +21,7 @@ const Dial = () => {
       >
         {actions.map((action) => (
           <SpeedDialAction
+            onClick={() => r.push(`${action.redirect}`)}
             key={action.name}
             icon={action.icon}
             tooltipTitle={action.name}
