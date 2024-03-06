@@ -1,106 +1,35 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
 import styles from "./page.module.css";
-import JsonFormatter from "react-json-formatter";
+//import JsonFormatter from "react-json-formatter";
+import JSONFormatter from "json-formatter-js";
 
-const api_body: string = `{
-  "count": 1302,
-  "next": "https://pokeapi.co/api/v2/pokemon?offset=20&limit=20",
-  "previous": null,
-  "results": [
-  {
-  "name": "bulbasaur",
-  "url": "https://pokeapi.co/api/v2/pokemon/1/"
-  },
-  {
-  "name": "ivysaur",
-  "url": "https://pokeapi.co/api/v2/pokemon/2/"
-  },
-  {
-  "name": "venusaur",
-  "url": "https://pokeapi.co/api/v2/pokemon/3/"
-  },
-  {
-  "name": "charmander",
-  "url": "https://pokeapi.co/api/v2/pokemon/4/"
-  },
-  {
-  "name": "charmeleon",
-  "url": "https://pokeapi.co/api/v2/pokemon/5/"
-  },
-  {
-  "name": "charizard",
-  "url": "https://pokeapi.co/api/v2/pokemon/6/"
-  },
-  {
-  "name": "squirtle",
-  "url": "https://pokeapi.co/api/v2/pokemon/7/"
-  },
-  {
-  "name": "wartortle",
-  "url": "https://pokeapi.co/api/v2/pokemon/8/"
-  },
-  {
-  "name": "blastoise",
-  "url": "https://pokeapi.co/api/v2/pokemon/9/"
-  },
-  {
-  "name": "caterpie",
-  "url": "https://pokeapi.co/api/v2/pokemon/10/"
-  },
-  {
-  "name": "metapod",
-  "url": "https://pokeapi.co/api/v2/pokemon/11/"
-  },
-  {
-  "name": "butterfree",
-  "url": "https://pokeapi.co/api/v2/pokemon/12/"
-  },
-  {
-  "name": "weedle",
-  "url": "https://pokeapi.co/api/v2/pokemon/13/"
-  },
-  {
-  "name": "kakuna",
-  "url": "https://pokeapi.co/api/v2/pokemon/14/"
-  },
-  {
-  "name": "beedrill",
-  "url": "https://pokeapi.co/api/v2/pokemon/15/"
-  },
-  {
-  "name": "pidgey",
-  "url": "https://pokeapi.co/api/v2/pokemon/16/"
-  },
-  {
-  "name": "pidgeotto",
-  "url": "https://pokeapi.co/api/v2/pokemon/17/"
-  },
-  {
-  "name": "pidgeot",
-  "url": "https://pokeapi.co/api/v2/pokemon/18/"
-  },
-  {
-  "name": "rattata",
-  "url": "https://pokeapi.co/api/v2/pokemon/19/"
-  },
-  {
-  "name": "raticate",
-  "url": "https://pokeapi.co/api/v2/pokemon/20/"
-  }
-  ]
-  }`;
+interface IPeticionBody {
+  api_body: object | Array<object> | false;
+}
 
-const PeticionBody = () => {
-  const jsonStyle = {
-    propertyStyle: { color: "black" },
-    stringStyle: { color: "green" },
-    numberStyle: { color: "blue" },
-  };
+const PeticionBody: React.FC<IPeticionBody> = ({api_body}) => {
+  let i = 0;
+
+  useEffect(() => {
+    if (window && i !== 1 && api_body) {
+      let jsondiv = document.getElementById(
+        "jsonFormatterParsed"
+      ) as HTMLDivElement;
+      const formatter = new JSONFormatter(api_body, 3);
+      jsondiv.appendChild(formatter.render());
+      i++;
+    }
+  }, []);
 
   return (
     <div className={styles.PeticionBody}>
-      <div className={styles.PeticionBody_json}>
-        <JsonFormatter json={api_body} jsonStyle={jsonStyle} tabWith={2} />
+      <div id="jsonFormatterParsed" className={styles.PeticionBody_json}>
+        {!api_body && (
+          <p className={styles.PeticionBody_New}>
+            Hace una nueva peticion para que el contenido aparezca aqui.
+          </p>
+        )}
       </div>
     </div>
   );

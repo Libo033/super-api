@@ -28,6 +28,13 @@
   border: 1px solid gainsboro;
   border-radius: 12px;
   font-family: "Courier New", Courier, monospace;
-  font-size: small;
+  font-size: medium;
   padding: 15px;
+}
+
+.PeticionBody_New {
+  padding-block: 128px;
+  color: gray;
+  display: flex;
+  justify-content: center;
 }

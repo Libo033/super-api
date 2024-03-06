@@ -7,7 +7,7 @@ const NuevaPeticion = () => {
   return (
     <main>
       <PeticionHead />
-      <PeticionBody />
+      <PeticionBody api_body={false} />
     </main>
   );
 };
