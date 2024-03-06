@@ -3,34 +3,19 @@ import React, { FormEvent, useState } from "react";
 import styles from "./page.module.css";
 import { Alert, AlertTitle, Button, TextField } from "@mui/material";
 
-const PeticionHead = () => {
-  const [error, setError] = useState<boolean>(false);
+interface IPeticionHead {
+  handleSubmit: (Event: FormEvent, url: string) => Promise<void>;
+  error: boolean;
+}
+
+const PeticionHead: React.FC<IPeticionHead> = ({ handleSubmit, error }) => {
   const [url, setUrl] = useState<string>("");
-
-  const handleSubmit = async (Event: FormEvent) => {
-    try {
-      Event.preventDefault();
-
-      const res = await fetch(url, { method: "GET" });
-      const data = await res.json();
-
-      console.log(data);
-    } catch (error) {
-      if (error instanceof Error) {
-        console.log(error.name);
-        setError(true);
-        setTimeout(() => {
-          setError(false);
-        }, 3000);
-      }
-    }
-  };
 
   return (
     <>
       <form
         className={styles.PeticionHead}
-        onSubmit={(Event: FormEvent) => handleSubmit(Event)}
+        onSubmit={async (Event: FormEvent) => await handleSubmit(Event, url)}
       >
         <TextField
           variant="outlined"

@@ -8,19 +8,17 @@ interface IPeticionBody {
   api_body: object | Array<object> | false;
 }
 
-const PeticionBody: React.FC<IPeticionBody> = ({api_body}) => {
-  let i = 0;
-
+const PeticionBody: React.FC<IPeticionBody> = ({ api_body }) => {
   useEffect(() => {
-    if (window && i !== 1 && api_body) {
+    if (window && api_body) {
       let jsondiv = document.getElementById(
         "jsonFormatterParsed"
       ) as HTMLDivElement;
       const formatter = new JSONFormatter(api_body, 3);
+      jsondiv.innerHTML = "";
       jsondiv.appendChild(formatter.render());
-      i++;
     }
-  }, []);
+  }, [api_body]);
 
   return (
     <div className={styles.PeticionBody}>
