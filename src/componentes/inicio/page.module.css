@@ -1,0 +1,11 @@
+.Inicio {
+  width: 100%;
+  padding-inline: 6%;
+  padding-bottom: 32px;
+}
+
+.Inicio_Container {
+  padding-block: 16px;
+  display: flex;
+  gap: 32px;
+}
