@@ -66,7 +66,7 @@ const Inicio = () => {
   };
 
   const handleDelete = (v: number) => {
-    console.log(v);
+    setPares(pares.filter((a) => a !== v));
   };
 
   return (
