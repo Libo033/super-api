@@ -12,10 +12,17 @@ const NuevaPeticion = () => {
     try {
       Event.preventDefault();
 
-      const res = await fetch(url, { method: "GET" });
-      const data: object | object[] | false = await res.json();
+      if (!apiBody) {
+        const res = await fetch(url, { method: "GET" });
+        const data: object | object[] | false = await res.json();
 
-      setApiBody(data);
+        setApiBody(data);
+      } else {
+        setApiBody(false);
+        (
+          document.getElementById("jsonFormatterParsed") as HTMLDivElement
+        ).innerHTML = "";
+      }
     } catch (error) {
       if (error instanceof Error) {
         console.log(error.name);
@@ -29,7 +36,11 @@ const NuevaPeticion = () => {
 
   return (
     <main>
-      <PeticionHead handleSubmit={handleSubmit} error={error} />
+      <PeticionHead
+        handleSubmit={handleSubmit}
+        error={error}
+        apiBody={apiBody}
+      />
       <PeticionBody api_body={apiBody} />
     </main>
   );

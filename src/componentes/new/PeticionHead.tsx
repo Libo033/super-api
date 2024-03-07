@@ -6,9 +6,10 @@ import { Alert, AlertTitle, Button, TextField } from "@mui/material";
 interface IPeticionHead {
   handleSubmit: (Event: FormEvent, url: string) => Promise<void>;
   error: boolean;
+  apiBody: false | object[] | object;
 }
 
-const PeticionHead: React.FC<IPeticionHead> = ({ handleSubmit, error }) => {
+const PeticionHead: React.FC<IPeticionHead> = ({ handleSubmit, error, apiBody }) => {
   const [url, setUrl] = useState<string>("");
 
   return (
@@ -30,7 +31,9 @@ const PeticionHead: React.FC<IPeticionHead> = ({ handleSubmit, error }) => {
           variant="contained"
           sx={{ height: "56px", width: "21%" }}
         >
-          nueva peticion
+          
+          {!apiBody && "nueva peticion"}
+          {apiBody && "borrar"}
         </Button>
       </form>
       {error && (
