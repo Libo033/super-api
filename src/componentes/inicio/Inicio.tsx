@@ -20,13 +20,17 @@ const InicioInputs: React.FC<{
     <div className={styles.Inicio_Container}>
       <TextField fullWidth variant="outlined" label="KEY" />
       <TextField fullWidth variant="outlined" label="VALUE" />
-      <Button
-        variant="outlined"
-        color="error"
-        onClick={() => deleteThis(value)}
-      >
-        <Delete />
-      </Button>
+      {value !== 1 ? (
+        <Button
+          variant="outlined"
+          color="error"
+          onClick={() => deleteThis(value)}
+        >
+          <Delete />
+        </Button>
+      ) : (
+        <span style={{ width: "147px", height: "56px" }}></span>
+      )}
     </div>
   );
 };
