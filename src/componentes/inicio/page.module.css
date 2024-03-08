@@ -1,5 +1,6 @@
 .Inicio {
   width: 100%;
+  height: fit-content;
   padding-inline: 6%;
   padding-bottom: 32px;
 }

@@ -29,7 +29,7 @@ const InicioInputs: React.FC<{
           <Delete />
         </Button>
       ) : (
-        <span style={{ width: "147px", height: "56px" }}></span>
+        <Button variant="text"></Button>
       )}
     </div>
   );
